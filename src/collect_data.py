@@ -2,11 +2,10 @@ import glob
 
 
 def get_java_file_list(repo_name):
-    path = '../repo/before/' + repo_name
+    path = './repo/before/' + repo_name
     java_files = glob.glob(path + '/**/*.java', recursive=True)
     for i in range(len(java_files)):
         java_files[i] = java_files[i][14:]  # delete before [repo_name]
-        # print(java_files[i])
     return java_files
 
 
@@ -17,7 +16,7 @@ def get_LOC(files):
     :return: [file_path, LOC]を要素に持つ二次元リスト
     """
     data = []
-    head = '../repo/before'
+    head = './repo/before/'
     for file in files:
         path = head + file
         # print(path)
@@ -31,7 +30,7 @@ def find_begin_hoge(files):
     """
     'begin_hoge'の一覧（とか）を表示
     """
-    head = '../repo/after'
+    head = 'collect_repo_metrics/repo/after/'
     begin_list = []
     # ast_list = []
     for i in range(len(files)):
@@ -78,7 +77,7 @@ def get_metrics(files):
                 'begin_import': 0, 'begin_class': 0, 'begin_function': 0}
         data_list.append(data)
 
-    head = '../repo/after'
+    head = './repo/after/'
     for data in data_list:
         path = head + data['file_path']
         with open(path) as f:
@@ -106,10 +105,3 @@ def get_metrics(files):
                 else:
                     data['begin_function'] += 1
     return data_list
-
-
-if __name__ == '__main__':
-    repository_name = 'ant'
-    file_paths = get_java_file_list(repository_name)
-    # find_begin_hoge(file_paths)
-    res = get_metrics(file_paths)
