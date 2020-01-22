@@ -1,3 +1,4 @@
 /src/git_reader.py
-/repo/
+/repo/after/
+/repo/before/
 *.db
